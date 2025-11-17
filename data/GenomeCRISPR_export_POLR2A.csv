@@ -1,0 +1,70 @@
+Organism,Genomebuild,Cell line,Chromosome,Start,End,Target gene,Sequence,Direction,PubMed ID,Cas9,Screentype,Condition,Max. effect,Min. effect
+Homo sapiens,GRCh38.p7,Jiyoye,17,7502007,7502030,POLR2A,AGGAGTTCTCCACAAAGCCACGG,-,26472758,hSpCas9,negative selection,viability,5,-9
+Homo sapiens,GRCh38.p7,Jiyoye,17,7503468,7503491,POLR2A,GCACCCCATCAAAGTGGTGGAGG,+,26472758,hSpCas9,negative selection,viability,9,-8
+Homo sapiens,GRCh38.p7,Jiyoye,17,7503704,7503727,POLR2A,GAAACTCCTCTGCCATGCGGCGG,-,26472758,hSpCas9,negative selection,viability,1,-9
+Homo sapiens,GRCh38.p7,Jiyoye,17,7511438,7511461,POLR2A,GAAGAAGATCATCATCACGGAGG,+,26472758,hSpCas9,negative selection,viability,8,-9
+Homo sapiens,GRCh38.p7,Jiyoye,17,7495937,7495960,POLR2A,GCAGAAGCGAATGTCTGTGACGG,+,26472758,hSpCas9,negative selection,viability,1,-9
+Homo sapiens,GRCh38.p7,Jiyoye,17,7496553,7496576,POLR2A,GATGGACAACAAGTTCGGTGTGG,+,26472758,hSpCas9,negative selection,viability,2,-8
+Homo sapiens,GRCh38.p7,Jiyoye,17,7497651,7497674,POLR2A,GGGACGCCCAGACTTCTGCATGG,-,26472758,hSpCas9,negative selection,viability,1,-9
+Homo sapiens,GRCh38.p7,Jiyoye,17,7501534,7501557,POLR2A,GAAGGCACACAACAATGAGCTGG,+,26472758,hSpCas9,negative selection,viability,2,-8
+Homo sapiens,GRCh38.p7,Jiyoye,17,7501990,7502013,POLR2A,GACTACGGGCCTGAGAGCCGTGG,+,26472758,hSpCas9,negative selection,viability,6,-9
+Homo sapiens,GRCh38.p7,Jiyoye,17,7502512,7502535,POLR2A,CTCCAGGATACATCCAGCGGCGG,+,26472758,hSpCas9,negative selection,viability,1,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7484836,7484859,POLR2A,AGTCCTGAGTCCGGATGAACTGG,+,26627737,hSpCas9,negative selection,viability,-7,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7495944,7495967,POLR2A,CGAATGTCTGTGACGGAGGGTGG,+,26627737,hSpCas9,negative selection,viability,9,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7496260,7496283,POLR2A,AGGAAGCCCACGTGAAACACAGG,-,26627737,hSpCas9,negative selection,viability,-9,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7496503,7496526,POLR2A,CATGTCTACGACCTTTGCAAGGG,+,26627737,hSpCas9,negative selection,viability,5,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7497002,7497025,POLR2A,CATCACAACAGCAGGCCGCACGG,-,26627737,hSpCas9,negative selection,viability,2,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7497466,7497489,POLR2A,CCAGTTCCATGTGGCCACCATGG,+,26627737,hSpCas9,negative selection,viability,0,-9
+Homo sapiens,GRCh38.p7,HL60,17,7484750,7484773,POLR2A,GCGCCTGCCTCCGCCATGCACGG,+,24336569,hSpCas9,negative selection,viability,-7,-9
+Homo sapiens,GRCh38.p7,HL60,17,7484803,7484826,POLR2A,CTCTCTTGATGGTGCGCAGCGGG,-,24336569,hSpCas9,negative selection,viability,-8,-9
+Homo sapiens,GRCh38.p7,HL60,17,7484813,7484836,POLR2A,ACCATCAAGAGAGTCCAGTTCGG,+,24336569,hSpCas9,negative selection,viability,-8,-9
+Homo sapiens,GRCh38.p7,HL60,17,7484827,7484850,POLR2A,CCGGACTCAGGACTCCGAACTGG,-,24336569,hSpCas9,negative selection,viability,-9,-9
+Homo sapiens,GRCh38.p7,HL60,17,7484846,7484869,POLR2A,GAGCCGCTTACCAGTTCATCCGG,-,24336569,hSpCas9,negative selection,viability,-9,-9
+Homo sapiens,GRCh38.p7,HL60,17,7495970,7495993,POLR2A,CAAATACCCAGAGACGACTGAGG,+,24336569,hSpCas9,negative selection,viability,-8,-9
+Homo sapiens,GRCh38.p7,HL60,17,7495976,7495999,POLR2A,GGCCTCCCTCAGTCGTCTCTGGG,-,24336569,hSpCas9,negative selection,viability,9,-9
+Homo sapiens,GRCh38.p7,A375,17,7491574,7491597,POLR2A,CAGGCTTGAGCCACTGCGCCTGG,+,25494202,dCas9-VP64,positive selection,resistance to PLX-4720 (puromycin),6,1
+Homo sapiens,GRCh38.p7,A375,17,7507781,7507804,POLR2A,GAGACGGGGTTTCACCATGTTGG,-,25494202,dCas9-VP64,positive selection,resistance to PLX-4720 (puromycin),6,-3
+Homo sapiens,GRCh38.p7,A375,17,7488449,7488472,POLR2A,GCTGAGGCGGGCGGATCACGAGG,+,25494202,dCas9-VP64,positive selection,resistance to PLX-4720 (puromycin),8,7
+Homo sapiens,GRCh38.p7,A375,17,7484416,7484439,POLR2A,AGTTTGTCTCTCCCCCTTCCGGG,-,25494202,dCas9-VP64,positive selection,resistance to PLX-4720 (puromycin),5,2
+Homo sapiens,GRCh38.p7,A375,17,7484388,7484411,POLR2A,GCCGGGACGGTTGGAGAAGAAGG,+,25494202,dCas9-VP64,positive selection,resistance to PLX-4720 (puromycin),9,-9
+Homo sapiens,GRCh38.p7,A375,17,7484366,7484389,POLR2A,GCTCAGAAGCGCCGAGAGCGCGG,+,25494202,dCas9-VP64,positive selection,resistance to PLX-4720 (puromycin),-1,-6
+Homo sapiens,GRCh38.p7,DLD1,17,7496565,7496588,POLR2A,GTTCGGTGTGGAACAACCTGAGG,+,27260157,hSpCas9,negative selection,viability,-9,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7496474,7496497,POLR2A,CCGCTTCTTGGGCTGTCCCTTGG,-,27260157,hSpCas9,negative selection,viability,0,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7496319,7496342,POLR2A,CTTCTGCTCCAAACTGCTTGTGG,+,27260157,hSpCas9,negative selection,viability,7,-7
+Homo sapiens,GRCh38.p7,DLD1,17,7496788,7496811,POLR2A,CAGCCCAGGATCCGGCGTTCTGG,+,27260157,hSpCas9,negative selection,viability,-8,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7496457,7496480,POLR2A,GGATATCCTGGCTAAGTCCAAGG,+,27260157,hSpCas9,negative selection,viability,-6,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7484827,7484850,POLR2A,CCAGTTCGGAGTCCTGAGTCCGG,+,27260157,hSpCas9,negative selection,viability,-9,-9
+Homo sapiens,GRCh38.p7,DLD1,17,7496502,7496525,POLR2A,ACATGTCTACGACCTTTGCAAGG,+,27260157,hSpCas9,negative selection,viability,6,-9
+Homo sapiens,GRCh38.p7,SW480,17,7503398,7503421,POLR2A,GTAACCTGCTGCGGATGATCTGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-8,-8
+Homo sapiens,GRCh38.p7,SW480,17,7503462,7503485,POLR2A,CGACCTGCACCCCATCAAAGTGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-9,-9
+Homo sapiens,GRCh38.p7,SW480,17,7503465,7503488,POLR2A,CCTGCACCCCATCAAAGTGGTGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,8,8
+Homo sapiens,GRCh38.p7,SW480,17,7503469,7503492,POLR2A,CACCCCATCAAAGTGGTGGAGGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-7,-7
+Homo sapiens,GRCh38.p7,SW480,17,7503485,7503508,POLR2A,TGGAGGGTAAGTACCTGCTTAGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-9,-9
+Homo sapiens,GRCh38.p7,SW480,17,7503486,7503509,POLR2A,GGAGGGTAAGTACCTGCTTAGGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-4,-4
+Homo sapiens,GRCh38.p7,SW480,17,7503487,7503510,POLR2A,GAGGGTAAGTACCTGCTTAGGGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-1,-1
+Homo sapiens,GRCh38.p7,SW480,17,7484843,7484866,POLR2A,AGTCCGGATGAACTGGTAAGCGG,+,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-7,-7
+Homo sapiens,GRCh38.p7,SW480,17,7503393,7503416,POLR2A,TCATCCGCAGCAGGTTACAGGGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-6,-6
+Homo sapiens,GRCh38.p7,SW480,17,7503394,7503417,POLR2A,ATCATCCGCAGCAGGTTACAGGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,0,0
+Homo sapiens,GRCh38.p7,SW480,17,7503395,7503418,POLR2A,GATCATCCGCAGCAGGTTACAGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,4,4
+Homo sapiens,GRCh38.p7,SW480,17,7503402,7503425,POLR2A,CATTCCAGATCATCCGCAGCAGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-1,-1
+Homo sapiens,GRCh38.p7,SW480,17,7503461,7503484,POLR2A,CACTTTGATGGGGTGCAGGTCGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,2,2
+Homo sapiens,GRCh38.p7,SW480,17,7503471,7503494,POLR2A,TACCCTCCACCACTTTGATGGGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,3,3
+Homo sapiens,GRCh38.p7,SW480,17,7503472,7503495,POLR2A,TTACCCTCCACCACTTTGATGGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,-3,-3
+Homo sapiens,GRCh38.p7,SW480,17,7503473,7503496,POLR2A,CTTACCCTCCACCACTTTGATGG,-,27013184,hSpCas9,positive selection,treatment with recombinant TRAIL,1,1
+Homo sapiens,GRCh38.p7,HT29,17,7499294,7499317,POLR2A,GTACAATGCAGACTTTGACGGGG,+,27453484,hSpCas9,positive selection,resistance to T3SS1-dependent cytotoxicity,0,-9
+Homo sapiens,GRCh38.p7,HT29,17,7496567,7496590,POLR2A,TTCGGTGTGGAACAACCTGAGGG,+,27453484,hSpCas9,positive selection,resistance to T3SS1-dependent cytotoxicity,9,-9
+Homo sapiens,GRCh38.p7,A375,,7497412,7497435,POLR2A,CAATGAGCAGAACGGCGCAGCGG,+,24336571,hSpCas9,positive selection,resistance to PLX after 7 days,2,-9
+Homo sapiens,GRCh38.p7,A375,,7497503,7497526,POLR2A,TGACTCACACGGGGCAAGCCAGG,-,24336571,hSpCas9,positive selection,resistance to PLX after 7 days,4,-9
+Homo sapiens,GRCh38.p7,293T,17,7496525,7496548,POLR2A,GCAAAAACATATGCGAGGGTGGG,+,27383988,hSpCas9,positive selection,resistance to West Nile virus (flavivirus),6,-9
+Homo sapiens,GRCh38.p7,A375,17,7499293,7499316,POLR2A,GTACAATGCAGACTTTGACGGGG,+,26780180,hSpCas9,positive selection,resistance to vemurafenib (Avana lentiCRISPRv2),0,-9
+Homo sapiens,GRCh38.p7,A375,17,7496566,7496589,POLR2A,TTCGGTGTGGAACAACCTGAGGG,+,26780180,hSpCas9,positive selection,resistance to vemurafenib (Avana lentiCRISPRv2),9,-9
+Homo sapiens,GRCh38.p7,A375,17,7497796,7497819,POLR2A,TGGAGCGGGGCACGCCAACCTGG,-,26780180,hSpCas9,positive selection,resistance to vemurafenib (GeCKOv2 lentiGuide),8,-9
+Homo sapiens,GRCh38.p7,A375,17,7497682,7497705,POLR2A,TGCCCTTCAACCGCTGCTTCAGG,-,26780180,hSpCas9,positive selection,resistance to vemurafenib (GeCKOv2 lentiGuide),9,-1
+Homo sapiens,GRCh38.p7,OCIAML3,17,7501606,7501628,POLR2A,TCGGGCATCGTTAAGAATGCGG,-,27760321,hSpCas9,negative selection,viability,-8,-9
+Homo sapiens,GRCh38.p7,OCIAML3,17,7501686,7501708,POLR2A,TGGTCGTGTCCGGAGCTAAAGG,+,27760321,hSpCas9,negative selection,viability,-4,-9
+Homo sapiens,GRCh38.p7,OCIAML3,17,7503117,7503139,POLR2A,GTATAATCAAAGCGGAACCTGG,-,27760321,hSpCas9,negative selection,viability,-8,-9
+Homo sapiens,GRCh38.p7,OCIAML3,17,7503227,7503249,POLR2A,GAATTTGAGCGGATGCGGGAGG,+,27760321,hSpCas9,negative selection,viability,-3,-9
+Homo sapiens,GRCh38.p7,OCIAML3,17,7498079,7498101,POLR2A,CTTCAAGAACTAGTGCGCAGGG,+,27760321,hSpCas9,negative selection,viability,-1,-9
+Homo sapiens,GRCh38.p7,K562,17,7484379,7484402,POLR2A,GAGAGCGCGGCCGGGACGGTTGG,+,27661255,dCas9-KRAB,negative selection,viability,-8,-8
+Homo sapiens,GRCh38.p7,K562,17,7484782,7484805,POLR2A,GGCATGCGCTGTCCCCCGAGGGG,-,27661255,dCas9-KRAB,negative selection,viability,7,7
+Homo sapiens,GRCh38.p7,DLD1_KRAS-WT,17,7503704,7503727,POLR2A,CCGCCGCATGGCAGAGGAGTTTC,-,28700943,hSpCas9,negative selection,viability,-4,-9

@@ -1,0 +1,118 @@
+---
+title: "Exploratory Data Analysis of CRISPR Effects"
+author: "Gina Magro"
+date: "2025-11-17"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    theme: united
+    number_sections: true
+---
+
+This report explores numeric and categorical features in the CRISPR screening dataset. 
+
+All plots are sourced from our R script `exploration_analysis.R` in the project `Gene_editing_efficiency.Rproj`. 
+```{r allPlots, include=F}
+source("/Users/magro/Documents/RStudio_Practice/Gene_editing_efficiency/scripts/data_cleaning_engineering.R")
+source("/Users/magro/Documents/RStudio_Practice/Gene_editing_efficiency/scripts/exploration_analysis.R")
+```
+
+# Data Description 
+Our data has been collected from the [Genome CRISPR](https://genomecrispr.dkfz.de/#!/results/POLR2A) database. This database provides quantitative information on the performance of the single guide RNAs targeting the `POLR2A` gene across various experimental conditions and human cell lines. The `POLR2A` gene provides instructions for a crucial component of RNA polymerase 2 enzyme responsible for transcribing DNA into messenger RNA (mRNA). Single Guide RNAs (sgRNAs) are used to direct the Cas9 protein to a desired target gene for editing. 
+
+
+Below are the variables seen in our `processed.csv` data file:  
+* indicates engineered feature 
+
+| Variable | Description | 
+| :---------|:-------------| 
+| `Organism` | All Organisms are homo sapiens |  
+| `Genomebuild` | Specific version of the reference genomes assembly used for mapping |  
+| `Cell.line` | The specific cell line used in the experiment |  
+| `Chromosome` | The chromosome where the sgRNA target sequence is located |   
+| `Start` | The genomic start coordinate of the sgRNA target site |   
+| `End` | The genomic end coordinate of the sgRNA target site |   
+| `Sequence` | The full nucleotide sequence of the sgRNA |   
+| `Direction` | The strand direction the target sequence. Forward/Reverse is +/- |   
+| `PubMed.ID` | The publication identifier where the experiment data was sourced |  
+| `Cas9` | The type of Cas9 nucelase used in the experiment |   
+| `Screentype` | The type of functional screen performed (eg. Viability screen, Drug Resistance screen) |   
+| `Condition` | Experimental details, such as drug treatment or viability group |   
+| `enrichment_effect` | Score for largest positive selection screens(cells thrive). Higher positive values mean the gene is important for resistance to a condition |  
+| `depletion_effect` | Score for the largest negative selection screens(cells die) observed. The large negative values mean the gene is essential for cell survival |   
+| `seq_length`* | The length of the sgRNA sequence |   
+| `A_count` `T_count` `G_count` `C_Count` *| Reference to the number of bases in the sequence corresponding to the first letter before `_Count` |   
+| `gc_content`* | The proportion of the bases in the sequence that contains `G` or `C` |  
+| `homopol_run`* | The length of the longest consecutive run of the same nucleotide |  
+| `pam`* | The 3-base Protospacer Adjacent Motif (PAM) sequence |   
+| `pam_NGG`* | Binary indicator (1 = PAM sequence is canonical "NGG"|  
+
+All `negative selection` screen types have the condition `viability`.   All `positive selection ` screen types have a variety of treatments/resistance for their conditions. 
+
+
+# Objective  
+We will examine both the enrichment and depletion scores; however, our primary focus will be on depletion effects. This analysis aims to observe the factors that contribute to designing effective sgRNAs and to better understand patterns of gene essentiality. 
+
+# Histogram Observations   
+## Screen types and Selection
+Below we see the Distribution of both our highest enrichment and depletion scores across all sgRNAs.
+```{r Histogram_effects, echo=F}
+grid.arrange(p1,p2, ncol = 1)
+```
+
+When data is stratified by **Screentype**(described above), distinct patterns emerge in how enrichment and depletion scores behave across our two experimental contexts of positive or negative selection.    
+
+
+#### Enrichment Effect   
+ - In negative selection screens, we observe a mostly uniform distribution, but a few higher counts at the most negative values. This indicates that most sgRNAs produce a loss of fitness and the targeted `POLR2A` gene is essential for survival.   
+ - In positive selection screens, the distribution appears to be roughly mirrored ( largely uniform with a skew towards positive values). This suggests that under certain stress or drug conditions, the `POLR2A` knockouts provide a growth or survival advantage. 
+ 
+#### Depletion Effect  
+For depletion effects, we see a strong skew towards the most negative values across both screening types. This pattern implies that many sgRNAs substantially reduce cell viability or growth rate, reflecting the essential nature of the `POLR2A` gene. The higher values in the positive selection reflect how treatments may increase survival of the cell. Reinforcing the pattern seen in the positive selection in the Enrichment Effects graph.  
+
+
+# GC Content and Homopolymer Runs  
+Traditionally, gene editing is most efficient at a 30-70% GC content and short(1-3 bases) homopolymer runs.  
+```{r GC_HOMO_hist, echo=F}
+grid.arrange(hist_gc, hist_homo, ncol = 1)
+```
+
+
+As our GC-content range is relatively low(~0-15%), most guides appear AT-rich. Such low GC levels may reduce Cas9 binding stability and editing efficiency.  
+Homopolymer run lengths are short ( 2-5 bases), suggesting that most guides are well-designed and unlikely to cause synthesis or binding artifacts. 
+
+
+# Bivariate Relationships  
+## Homopolymer and GC Content Influence on Depletion Effects
+To better understand sgRNA efficiency, we examine how GC content and homopolymer run length relate to depletion effects. Assessing both of their influence on guide performance. 
+```{r GC_vs_depletion, echo =F, message =F}
+gc_vs_dep
+```
+
+***First looking at GC Content***:  
+**Negative Selection**: The depletion effect is roughly uniformly distributed across GC content. There is a slight increase in depletion score around a GC content of 11%, suggesting these guides may be marginally less efficient.    
+**Positive selection**: The depletion effect shows a wave-like, multimodal pattern across GC content. This indicates that even under positive selection conditions, certain GC-ranges correspond to stronger or weaker depletion, reflecting variability in guide performance. This pattern may also be influenced by treatment-specific effects, providing evidence for some guides to appear more or less efficient under conditions.  
+
+```{r homo_vs_dep, echo = F, message=F}
+homo_vs_dep
+```
+
+***Next Looking at Longest Homopolymer Runs***:   
+**Negative Selection**: Depletion scores are generally consistent and strongly negative ( around - 9) for homopolymer runs of 2-4 bases. Indicating stable and effective targeting. For runs of length 5, depletion scores increased sharply to +9. This suggests that guides remain effective as long as homopolymer runs are under 5 bases. This has been consistently observed for sgRNAs in general and is true for ours as well. 
+
+**Positive Selection**: Depletion scores show high variability across all homopolymer run lengths, with no clear trend. This indicated that under positive selection conditions, homopolymer length does not appear to have a strong or consistent effect on depletion. 
+
+## Pam type and Cas9 Variant 
+In this section, we focus on the `hSpCas9` variant and its interaction with different PAM sequences to examine their impact on depletion. The `hSpCas9` protein is the predominant variant, used in 59 out of 67 experiments. Whereas the other variants are sparsely represented (`sCas9-KRAB` : 2 experiments; `dCas9-VP64` : 6 experiments). 
+```{r PAM_vs_Cas9, echo = F}
+box.PAM_Cas9
+```
+
+
+The PAM sequence does not appear to significantly influence depletion effects. Consistent with earlier observations, negative selection screens show uniformly strong depletion scores, while positive selection screens exhibit a wider range of depletion effects across PAM sequences. 
+
+
+# Conclusion  
+This exploratory analysis revealed key factors influencing CRISPR-Cas9 depletion outcomes. Strong negative depletion scores for POLR2A confirmed its essentiality and validated the data quality. Guide efficiency was closely tied to sequence features, with moderate GC content and short homopolymers producing stronger depletion effects. In contrast, variation in Cas9 variant and PAM sequence showed minimal impact, suggesting these elements are less critical under standard screening conditions. The wider variability observed in positive selection screens reflects how treatment-specific conditions can drive different outcomes, often promoting greater resistance or cell viability. Together, these findings highlight how both biological context and guide design contribute to CRISPR screen outcomes, offering practical insight for optimizing experimental design and interpreting functional genomics data.

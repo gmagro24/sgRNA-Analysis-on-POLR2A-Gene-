@@ -1,0 +1,142 @@
+---
+title: "Predicting Depletion Effects with PCA and Machine Learning"
+author: "Gina Magro" 
+date: "2025-11-17"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    theme: united
+    number_sections: true
+---
+
+All plots are sourced from our R script `Predictive_Effects_Models.R` in the project  `Gene_editing_efficiency.Rproj`. Data cleaning and feature engineering occurred in the R script `data_cleaning_engineerng.R` in the same project. 
+```{r allPlots, include=F, warning=FALSE, message=F, echo=F}
+source("/Users/magro/Documents/RStudio_Practice/Gene_editing_efficiency/scripts/data_cleaning_engineering.R")
+source("/Users/magro/Documents/RStudio_Practice/Gene_editing_efficiency/scripts/Predictive_Effect_Models.R")
+```
+
+# Introduction  
+
+This report builds upon a previous exploratory data analysis ( `EDA_Report.rmd`) of CRISPR sgRNA depletion effects. Here we apply Principal Component Analysis (PCA) to identify the main drivers of variance in predictor variables and train predictive models. The goal is to determine whether experimental conditions, cell lines, or sgRNA sequence features are the most predictive of depletion effects. 
+
+# Data Overview  
+The data set focuses on: 
+- Numeric Features: `gc_content`, `homopol_run`
+- Categorical Features: `Screentype`, `Condition`, `Cell.line`
+- Response Variable: `depletion_effect` 
+ 
+# Principal Component Analysis - PCA  
+To identify which variable drive the most variability in out data set, we preformed a Principal Component Analysis. 
+  
+
+```{r PCA_rotations, echo = F}
+pca_results$rotation
+```
+### Interpretation of Principal Components 
+**PC1** : Dominated by `Condition`(-0.64) and `Screentype`(0.59), with some contribution of `homopol_run`( 0.42). This is captures the differences between experimental conditions and screening types.   
+**PC2** : Mainly influenced by `Cell.line`(0.79), with moderate contributions from `Screentype` and `homopol_run`.    
+**PC3** : Captures sequence-level variability, dominated by `gc_content` (-0.89).   
+**PC4** : Reflects variation in homopolymer run length (0.83).   
+**PC5**: Represents combined effects of `Screentype`(-0.62) and `Condition`(-0.68).  
+
+
+Together, **PC1, PC2, and PC5** capture the variation associated with experimental factors, while **PC3 and PC4** describe sequence feature variation. 
+```{r pca_results, echo = F}
+summary(pca_results)
+```
+
+  
+
+The experimental components (PC1, PC2, and PC5) explain approximately 67% of the total variation, whereas the sequence-related components (PC3 and PC4) account for roughly 33%.  
+
+# Predictive Modeling   
+Given these results, its clear that models based primarily on experimental variables preform moderately well. The table below compares the performance of four machine learning algorithms using Root Mean Square Error(RMSE) and correlation between predicted and actual depletion effect values. 
+
+```{r model_compare, echo=F}
+Model_compare
+```
+
+When the models were inaccurate, they tended to overestimate depletion effects in positive selection screens, predicting a greater depletion than was observed. This behavior is visualized in SVM prediction vs observed points plotted. 
+```{r SVM_preds_plot, echo = F}
+ggplot(plotting_points, aes(x = svmPreds, y = depletion_effect, color = Condition)) + 
+  geom_point(size = 2, alpha = 0.8) +
+  theme_minimal() +
+  labs(
+    title = "SVM Predictions vs Observed Values",
+    x = "Predicted Depletion Effect",
+    y = "Observed Depletion Effect",
+    color = "Condition Type"   # <-- this sets the legend label
+  ) +
+  theme(
+    legend.position = "right",     # or "bottom", "top", etc.
+    legend.title = element_text(size = 11, face = "bold"))
+
+
+```
+Conditions types are color-coded in the figure. The Viability condition (our largest category with 38 samples) is consistently predicted and observed near depletion values of -9, reflecting negative selection screens. In contrast, positive selection conditions (e.g. resistance to drug treatments) are underrepresented and contribute disproportionately to model error.  
+`r table(df_proc$Condition)`  
+
+
+
+To further evaluate predictive performance, we used the top performing models (Random Forest and SVM) with Principal Components 3 and 4. Primarily representing sequence-level features such as GC content and homopolymer run length. 
+
+```{r PCA_RF, echo=F, warning=F, message=F }
+
+##### Poor quality prediction when based on sequence/gc content Principal Components
+pca_scores <- as.data.frame(pca_results$x)
+pca_scores$depletion_effect <- predictors_df$depletion_effect
+
+pc_features <- pca_scores %>% select(PC3, PC4, depletion_effect)
+
+library(caret)
+
+set.seed(123)
+train_idx <- createDataPartition(pc_features$depletion_effect, p = 0.8, list = FALSE)
+train_pc <- pc_features[train_idx, ]
+test_pc <- pc_features[-train_idx, ]
+
+library(randomForest)
+
+rf_pc_model <- randomForest(
+  depletion_effect ~ PC3 + PC4,
+  data = train_pc,
+  ntree = 500
+)
+
+# Predict on test set
+rf_pc_preds <- predict(rf_pc_model, newdata = test_pc)
+
+
+svm_model <- train(
+  depletion_effect ~., 
+  data = train_pc, 
+  method = 'svmRadial', 
+  trControl = train_crtl,
+  preProcess = c("center", "scale"), # Scaling helps SVMs A LOT
+  tuneLength = 3 # Try 3 different combinations of C and sigma
+)
+
+PC_svmPreds <- predict(svm_model, newdata = test_pc)
+
+
+PC_model_compare <- data.frame(
+  Model = c("Random Forest", "SVM"),
+  Correlation = c(cor(test_pc$depletion_effect, rf_pc_preds),
+                  cor(PC_svmPreds, test_pc$depletion_effect)),
+  RMSE = c(RMSE(test_pc$depletion_effect, rf_pc_preds),
+           RMSE(test_pc$depletion_effect, PC_svmPreds))
+)
+PC_model_compare
+```
+
+These results demonstrate that models based on sequence-derived features alone have poor predictive performance, indicating that such features contribute very little to the variance observed in depletion effects. Our validation metrics are RMSE and corrletion between predicted values and observed. 
+
+### Interpretation   
+Overall, cell line, experimental condition, and screen type are the strongest predictors of depletion effects. In contrast, sgRNA-level sequence features explain only a small proportion of the total variance. This suggests; reported sgRNA exhibit consistent and reliable performance across experiments, sequence-level properties alone are insufficient to predict depletion outcomes, and experimental context is the dominate driver of depletion effects with multiple sgRNAs producing robust effects across different conditions. 
+
+# Conclusion  
+Despite the small sample size(n=67), these analyses provide consistent evidence that experimental context drives the majority of observed depletion variability, rather than intrinsic sgRNA sequence properties. Models incorporating call line, screen type, and treatment condition explain most of the variance, while those relying only on sequence-based features preform poorly.  
+These findings emphasize the importance on contextual experiment design and highlight that sgRNA sequences used across screens are generally robust and not major determinants of depletion strength. Future studies with larger, more balanced data sets could further validate these conclusion and improve model generalization. 
+
