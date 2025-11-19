@@ -34,7 +34,8 @@ To identify which variable drive the most variability in out data set, we prefor
 ```{r PCA_rotations, echo = F}
 pca_results$rotation
 ```
-### Interpretation of Principal Components 
+## Interpretation of Principal Components 
+### All Variables Included
 **PC1** : Dominated by `Condition`(-0.64) and `Screentype`(0.59), with some contribution of `homopol_run`( 0.42). This is captures the differences between experimental conditions and screening types.   
 **PC2** : Mainly influenced by `Cell.line`(0.79), with moderate contributions from `Screentype` and `homopol_run`.    
 **PC3** : Captures sequence-level variability, dominated by `gc_content` (-0.89).   
@@ -47,11 +48,21 @@ Together, **PC1, PC2, and PC5** capture the variation associated with experiment
 summary(pca_results)
 ```
 
-  
-
 The experimental components (PC1, PC2, and PC5) explain approximately 67% of the total variation, whereas the sequence-related components (PC3 and PC4) account for roughly 33%.  
 
-# Predictive Modeling   
+### PCA Excluding Experimental Factors   
+Here we describe the PCA when only including: `Cas9`, `seq_length`, `A_count `, `C_count`, `G_count`     `T_count`, `gc_content`, `homopol_run`, `pam_NGG`
+
+```{r PCA_EXCLexperiment}
+summary(pca_EXCLexper)
+```
+
+Although this PCA was preformed using only sequence-derived features, its total explained variance is substantially smaller than in the full data set. In the full PCA, these experimental factors account fro roughly two-thirds of the total variability, while sequence-level features contribute only about one-third.   
+Reflecting this, the sequence-only PCA shows that PC1 captures roughly one-third of the variance with a higher standard variance than above. Models trained without experimental context will have limited predictive power.
+
+
+# Predictive Modeling  
+## Comparing Models
 Given these results, its clear that models based primarily on experimental variables preform moderately well. The table below compares the performance of four machine learning algorithms using Root Mean Square Error(RMSE) and correlation between predicted and actual depletion effect values. 
 
 ```{r model_compare, echo=F}
@@ -79,9 +90,8 @@ Conditions types are color-coded in the figure. The Viability condition (our lar
 `r table(df_proc$Condition)`  
 
 
-
+## Top Learners on Sequence Feature Influenced Principal Components
 To further evaluate predictive performance, we used the top performing models (Random Forest and SVM) with Principal Components 3 and 4. Primarily representing sequence-level features such as GC content and homopolymer run length. 
-
 ```{r PCA_RF, echo=F, warning=F, message=F }
 
 ##### Poor quality prediction when based on sequence/gc content Principal Components
@@ -133,7 +143,7 @@ PC_model_compare
 
 These results demonstrate that models based on sequence-derived features alone have poor predictive performance, indicating that such features contribute very little to the variance observed in depletion effects. Our validation metrics are RMSE and corrletion between predicted values and observed. 
 
-### Interpretation   
+## Interpretation   
 Overall, cell line, experimental condition, and screen type are the strongest predictors of depletion effects. In contrast, sgRNA-level sequence features explain only a small proportion of the total variance. This suggests; reported sgRNA exhibit consistent and reliable performance across experiments, sequence-level properties alone are insufficient to predict depletion outcomes, and experimental context is the dominate driver of depletion effects with multiple sgRNAs producing robust effects across different conditions. 
 
 # Conclusion  

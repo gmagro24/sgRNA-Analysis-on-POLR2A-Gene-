@@ -37,21 +37,21 @@ pca_results <- prcomp(pca_df,center = T, scale. = T)
 summary(pca_results)
 pca_results$rotation
 
-#fviz_pca_var(pca_results, col.var = "contrib",
-#             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
-#             repel = TRUE) +
-#  labs(title = "PCA – Variable Contributions (PC1 & PC2)")
+fviz_pca_var(pca_results, col.var = "contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE) +
+  labs(title = "PCA – Variable Contributions (PC1 & PC2)")
 
 
 # PCA excluding experimental conditions
-pca_df <- df_proc %>% 
+pca_df_EXCLexper <- df_proc %>% 
   select(-c(Condition, Cell.line,enrichment_effect, Screentype, depletion_effect, Organism, 
             Genomebuild, Chromosome, Target.gene, Sequence, Start, End, PubMed.ID, pam, Direction))  %>% 
   mutate_if(is.factor, as.numeric)
 
-pca_results <- prcomp(pca_df,center = T, scale. = T)
-summary(pca_results)
-pca_results$rotation
+pca_EXCLexper <- prcomp(pca_df_EXCLexper,center = T, scale. = T)
+summary(pca_EXCLexper)
+pca_EXCLexper$rotation
 
 
 ####################################### 
