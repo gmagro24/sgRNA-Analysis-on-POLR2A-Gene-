@@ -6,11 +6,11 @@ This project analyzes the efficiency of sgRNAs targeting the POLR2A gene. It inc
 ---
 
 ## Overview 
-This project is structures intot he follwoing major compnenets 
-- Exploratory Data Analysis (EDA) - Charcterizing guide RAN sequence and experimental conditions.
+This project is structured into the follwoing major componets: 
+- Exploratory Data Analysis (EDA) - Charcterizing guide RNA sequence and experimental conditions.
 - Feature Engineering - Creating numeric and categorical features from sequence and experimental metadata.
 - Principal Component Analysis (PCA) - Identifying the main drivers of variance across sequence and experimental features.
-- Predictive Modeling = Training and evaluation multiple machine learning models.
+- Predictive Modeling - Training and evaluating multiple machine learning models.
 - Evalutaion - Comparing preformance using RMSE and corrleation, with emphasis on sequence vs experimental predictors.
 
 
@@ -30,7 +30,7 @@ Gene_editing_efficiency.Rproj/
 ```
 
 
-## Installaion
+## Installation
 Clone the repository
 ```bash
 git clone https://github.com/gmagro24/sgRNA-Analysis-on-POLR2A-Gene-.git
@@ -43,7 +43,7 @@ install.packages(c(
   "randomForest", "xgboost", "factoextra", "caretEnsemble", "dplyr", "readr", "ggplot2", "gridExtra", "ggcorrplot"
 ))
 ```
-## Usuage 
+## Usage 
 Run data cleaning and feature engineering 
 ```r
 source("scripts/data_cleaning_engineering.R")
@@ -57,12 +57,12 @@ Run predictive modeling
 source("scripts/Predictive_Effect_Models.R")
 ```
 #### OR for quick analysis
-Knit the reports as they source the required documents to from the report. 
+Knit the reports as they source the required documents needed to generate the report. 
 
 
-## Author 
-Gina Magro 
-GitHub: gmagro24
-email: magro.g@northeastern.edu 
-or 
-email: Gina.Magro24@gmail.com 
+## Author   
+Gina Magro  
+GitHub: gmagro24  
+email: magro.g@northeastern.edu   
+or   
+email: Gina.Magro24@gmail.com   
