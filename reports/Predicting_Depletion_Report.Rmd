@@ -11,6 +11,7 @@ output:
     number_sections: true
 ---
 
+
 All plots are sourced from our R script `Predictive_Effects_Models.R` in the project  `Gene_editing_efficiency.Rproj`. Data cleaning and feature engineering occurred in the R script `data_cleaning_engineerng.R` in the same project. 
 ```{r allPlots, include=F, warning=FALSE, message=F, echo=F}
 source("/Users/magro/Documents/RStudio_Practice/Gene_editing_efficiency/scripts/data_cleaning_engineering.R")
